@@ -60,7 +60,7 @@
   document.addEventListener('pointerdown',e=>{
     const b=e.target.closest&&e.target.closest('button,.student');
     if(!b||b.disabled)return;
-    if(b.classList.contains('star')&&b.dataset.n)return play('star',+b.dataset.n);
+    if(b.classList.contains('star')){const n=b.dataset.n||b.dataset.ts;if(n)return play('star',+n)}
     if(b.id==='sfxToggle')return;
     play('click');
   },true);
@@ -89,7 +89,7 @@
       if(n.nodeType!==1)continue;
       if(n.classList.contains('toast')){
         const tx=n.textContent||'';
-        play(errRe.test(tx)?'error':/evaluación.*registrada/i.test(tx)?'submit':'ok');
+        play(errRe.test(tx)?'error':/evaluación.*(registrada|enviada)/i.test(tx)?'submit':'ok');
       }
       const ps=n.matches('.podium-stage')?n:n.querySelector&&n.querySelector('.podium-stage');
       if(ps&&!ps.dataset.sfx){ps.dataset.sfx='1';play('podium')}
