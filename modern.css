@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap');
+
+/* ============ Tokens ============ */
+:root{
+  --ink:#09090f;
+  --ink-2:#101019;
+  --surface:#14141f;
+  --surface-2:#1a1a28;
+  --line:#2a2a3c;
+  --line-soft:#ffffff12;
+  --text:#f4f4f8;
+  --muted:#9d9db3;
+  --accent:#d6ff4d;
+  --accent-ink:#11140a;
+  --violet:#8f7bff;
+  --gold:#ffd166;
+  --r-sm:12px;
+  --r-md:18px;
+  --r-lg:26px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --font-display:'Bricolage Grotesque','DM Sans',system-ui,sans-serif;
+  --font-body:'DM Sans',system-ui,sans-serif;
+}
+
+/* ============ Base ============ */
+html{color-scheme:dark}
+body{
+  font-family:var(--font-body);
+  background:var(--ink);
+  position:relative;
+  -webkit-font-smoothing:antialiased;
+}
+/* Fondo vivo: dos luces que se desplazan muy despacio */
+body:before,body:after{
+  content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;
+  width:60vmax;height:60vmax;filter:blur(90px);opacity:.28;
+}
+body:before{background:var(--violet);left:-25vmax;top:-30vmax;animation:drift1 28s ease-in-out infinite alternate}
+body:after{background:var(--accent);right:-35vmax;bottom:-40vmax;opacity:.1;animation:drift2 34s ease-in-out infinite alternate}
+@keyframes drift1{to{transform:translate(18vmax,12vmax) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-14vmax,-10vmax) scale(1.2)}}
+
+h1,h2,h3,.brand,.code,.projection-title,.podium-name{font-family:var(--font-display)}
+h2{font-size:clamp(20px,2.4vw,26px);letter-spacing:-.025em;margin:0 0 6px}
+h3{letter-spacing:-.02em}
+.muted{line-height:1.55}
+
+::selection{background:var(--accent);color:var(--accent-ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+
+/* ============ Barra superior ============ */
+.top{
+  height:68px;
+  background:rgba(9,9,15,.68);
+  backdrop-filter:blur(18px) saturate(1.4);
+  border-bottom:1px solid var(--line-soft);
+}
+.brand{font-weight:800;letter-spacing:-.02em;font-size:17px}
+.mark{
+  background:var(--accent);color:var(--accent-ink);
+  border-radius:12px;font-family:var(--font-display);
+  box-shadow:0 0 0 4px #d6ff4d1c,0 8px 24px #d6ff4d33;
+  transition:transform .4s var(--ease);
+}
+.brand:hover .mark{transform:rotate(-8deg) scale(1.06)}
+.top small{padding:6px 12px;border:1px solid var(--line-soft);border-radius:999px;background:#ffffff08}
+
+/* ============ Hero ============ */
+.hero h1{
+  font-weight:800;
+  letter-spacing:-.045em;
+  line-height:.95;
+}
+.hero h1 span{color:var(--accent)!important}
+.hero p{font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:var(--muted)}
+.eyebrow{letter-spacing:.12em;font-size:11px}
+
+/* Única entrada orquestrada al cambiar de vista */
+#main>.hero>div:first-child{animation:heroIn .7s var(--ease) both}
+#main>.hero>.actions{animation:heroIn .7s .12s var(--ease) both}
+#main>.card,#main>.grid,#main>.modebar{animation:heroIn .7s .2s var(--ease) both}
+@keyframes heroIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ============ Tarjetas ============ */
+.card{
+  background:linear-gradient(180deg,rgba(26,26,40,.82),rgba(16,16,25,.82));
+  border:1px solid var(--line-soft);
+  border-radius:var(--r-lg);
+  box-shadow:0 1px 0 #ffffff0d inset,0 24px 60px -24px #000c;
+  backdrop-filter:blur(12px);
+}
+.card .card{border-radius:var(--r-md);box-shadow:none;backdrop-filter:none}
+
+/* ============ Botones ============ */
+.btn{
+  background:var(--surface-2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:12px 18px;
+  font-weight:700;
+  letter-spacing:-.005em;
+  transition:transform .18s var(--ease),background .2s,border-color .2s,box-shadow .25s;
+}
+.btn:hover:not(:disabled){background:#22223a;border-color:#43436a;transform:translateY(-2px)}
+.btn:active:not(:disabled){transform:translateY(0) scale(.97)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.primary{
+  background:var(--accent);color:var(--accent-ink);border-color:var(--accent);
+  box-shadow:0 8px 28px -8px #d6ff4d88;
+}
+.btn.primary:hover:not(:disabled){background:#e4ff7e;border-color:#e4ff7e;box-shadow:0 12px 34px -8px #d6ff4dcc}
+
+/* ============ Selector docente / estudiante ============ */
+.modebar{
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--line-soft);
+  border-radius:18px;padding:6px;
+  backdrop-filter:blur(10px);
+}
+.modebar button{border-radius:13px;transition:background .25s var(--ease),color .25s,transform .15s}
+.modebar button:hover:not(.active){color:var(--text);background:#ffffff0a}
+.modebar button.active{background:var(--text);color:#0c0c12;box-shadow:0 6px 18px -6px #0008}
+
+/* ============ Formularios ============ */
+.field label{
+  font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.02em;
+  text-transform:none;
+}
+.field input,.field textarea,.field select{
+  background:rgba(9,9,15,.7);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:13px 14px;
+  transition:border-color .2s,box-shadow .2s,background .2s;
+}
+.field input:hover,.field textarea:hover,.field select:hover{border-color:#44445f}
+.field input:focus,.field textarea:focus,.field select:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 4px #d6ff4d1f;
+  background:#0c0c14;
+}
+input[type=file]{color:var(--muted);font-size:14px}
+input[type=file]::file-selector-button{
+  margin-right:12px;padding:9px 14px;border-radius:11px;border:1px solid var(--line);
+  background:var(--surface-2);color:var(--text);font:inherit;font-weight:700;cursor:pointer;
+  transition:background .2s,border-color .2s;
+}
+input[type=file]::file-selector-button:hover{background:#23233a;border-color:var(--accent)}
+
+/* ============ Listas, estudiantes, piezas ============ */
+.student,.piece,.criterion,.stat,.award{
+  background:rgba(255,255,255,.035);
+  border:1px solid var(--line-soft);
+  border-radius:16px;
+}
+.student{transition:transform .2s var(--ease),border-color .2s,background .2s}
+.student:hover{transform:translateY(-3px);border-color:var(--accent);background:rgba(214,255,77,.06)}
+.student:active{transform:scale(.98)}
+.avatar{background:linear-gradient(145deg,#2b2b42,#1c1c2c);border:1px solid var(--line-soft)}
+.piece{transition:border-color .2s,background .2s}
+.piece:hover{border-color:#ffffff26;background:rgba(255,255,255,.06)}
+.piece img{border-radius:10px;border:1px solid var(--line-soft)}
+
+.badge{background:#ffffff0f;border:1px solid var(--line-soft)}
+.badge.live{background:rgba(214,255,77,.1);border-color:rgba(214,255,77,.3);color:var(--accent)}
+.badge.live{animation:pulseBadge 2.2s ease-in-out infinite}
+@keyframes pulseBadge{50%{box-shadow:0 0 0 6px rgba(214,255,77,.08)}}
+
+/* Código de sala */
+.code{
+  font-weight:800;letter-spacing:.1em;
+  text-shadow:0 0 40px #d6ff4d44;
+}
+
+/* ============ Evaluación: estrellas y criterios ============ */
+.star{
+  color:#3a3a50;
+  transition:transform .15s var(--ease),color .15s,filter .2s;
+}
+button.star:hover{transform:scale(1.25) rotate(-6deg);color:#d6ff4d88}
+button.star:active{transform:scale(.9)}
+.star.on{color:var(--accent);filter:drop-shadow(0 0 8px #d6ff4d66)}
+.star.half{background:linear-gradient(90deg,var(--accent) 50%,#3a3a50 50%);-webkit-background-clip:text;background-clip:text}
+.criterion{transition:border-color .2s,background .2s}
+.criterion:hover{border-color:#ffffff2a}
+.criterion strong{font-size:12px;letter-spacing:.01em}
+
+.artboard{
+  background:radial-gradient(circle at 50% 40%,#14141f,#07070b);
+  border:1px solid var(--line-soft);
+  border-radius:var(--r-md);
+  box-shadow:inset 0 0 60px #0008;
+}
+.artboard img{border-radius:6px;box-shadow:0 20px 60px -15px #000c}
+
+/* ============ Proyección ============ */
+.projection-stats span{
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--line-soft);
+  border-radius:999px;
+}
+
+/* ============ Podio y reconocimientos ============ */
+.podium-live{background:rgba(214,255,77,.08);border-color:rgba(214,255,77,.28)}
+.pedestal{
+  background:linear-gradient(180deg,#2a2a40,#15151f);
+  border-color:var(--line-soft);
+}
+.first .pedestal{background:linear-gradient(180deg,#3a3a52,#181824);border-color:#ffffff2a}
+.podium-slot.first .podium-avatar{box-shadow:0 0 0 6px #d6ff4d18,0 0 60px #d6ff4d33,0 16px 42px #0009}
+.award{transition:transform .25s var(--ease),border-color .25s}
+.award:hover{transform:translateY(-4px)}
+.award-winner{border-color:rgba(214,255,77,.3);background:linear-gradient(160deg,rgba(214,255,77,.08),rgba(255,255,255,.02))}
+
+/* ============ Modal del lobby ============ */
+.lobby-modal-backdrop{background:rgba(5,5,10,.8)}
+.lobby-modal{border-color:var(--line-soft);border-radius:32px}
+.lobby-modal-copy h1{font-weight:800}
+.lobby-modal-close{transition:transform .2s var(--ease),background .2s}
+.lobby-modal-close:hover{transform:rotate(90deg)}
+.lobby-qr-frame{animation:qrFloat 6s ease-in-out infinite}
+@keyframes qrFloat{50%{transform:rotate(-1.5deg) translateY(-8px)}}
+.lobby-scan{letter-spacing:.14em}
+
+/* ============ Toast ============ */
+.toast{
+  background:rgba(244,244,248,.96);
+  border-radius:16px;
+  box-shadow:0 20px 50px -10px #000c;
+  animation:toastIn .35s var(--ease) both;
+}
+@keyframes toastIn{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}
+
+/* ============ Móvil ============ */
+@media(max-width:800px){
+  body:before,body:after{filter:blur(60px)}
+  .btn{padding:13px 16px}
+  .field input,.field textarea,.field select{font-size:16px} /* evita el zoom de iOS */
+}
+
+/* ============ Accesibilidad: sin movimiento si el sistema lo pide ============ */
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition:none!important}
+}
+
+/* Botón de sonido */
+.top small{margin-left:auto;margin-right:12px}
+.sfx-toggle{width:38px;height:38px;border-radius:12px;border:1px solid var(--line-soft);background:#ffffff08;font-size:17px;line-height:1;display:grid;place-items:center;transition:transform .15s var(--ease),background .2s}
+.sfx-toggle:hover{background:#ffffff14;transform:scale(1.08)}
+.sfx-toggle:active{transform:scale(.92)}
