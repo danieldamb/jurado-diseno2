@@ -193,13 +193,17 @@
   position:relative;
   height:100%;
   max-height:none;
-  padding:8px 12px 130px;
+  padding:12px;
   box-sizing:border-box;
   overflow:hidden;
-  display:block;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  gap:8px;
 }
 #main.dashboard-view:fullscreen #projection .projection-content{
-  height:calc(100vh - 180px);
+  height:auto;
+  flex:0 1 auto;
   min-height:0;
   display:flex;
   align-items:center;
@@ -318,6 +322,7 @@
   display:inline-flex;
   align-items:center;
   white-space:nowrap;
+  padding:6px 8px;
 }
 #main.dashboard-view:fullscreen #projection .projection-controls{
   position:fixed;
@@ -353,8 +358,8 @@
   max-width:88vw;
 }
 #main.dashboard-view:fullscreen #projection .projection-stats{
-  margin-top:3px;
   gap:6px;
+  margin:0;
 }
 #main.dashboard-view:fullscreen #projection .projection-controls{
   bottom:16px;
@@ -377,28 +382,36 @@
 /* v40: barra de información arriba y controles abajo, sin superposición en fullscreen */
 #main.dashboard-view:fullscreen #projection .projection-meta{
   position:fixed;
-  left:50%;
+  left:34%;
   top:18px;
   bottom:auto;
-  transform:translateX(-50%);
+  right:240px;
+  transform:none;
   z-index:40;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  white-space:nowrap;
   width:auto;
-  min-width:520px;
-  max-width:88vw;
-  padding:6px 16px 8px;
+  min-width:0;
+  max-width:none;
+  margin:0;
+  padding:0;
   box-sizing:border-box;
-  background:rgba(5,5,6,.92);
-  border:1px solid #2a2a32;
-  border-radius:12px;
-  backdrop-filter:blur(10px);
+  background:transparent;
+  border:0;
+  border-radius:0;
+  backdrop-filter:none;
 }
 #main.dashboard-view:fullscreen #projection .projection-controls{
-  position:fixed;
-  left:50%;
+  position:relative;
+  left:auto;
   top:auto;
-  bottom:18px;
-  transform:translateX(-50%);
-  z-index:100;
+  bottom:auto;
+  transform:none;
+  z-index:2;
+  align-self:center;
   width:max-content;
   min-width:0;
   max-width:90vw;
@@ -415,20 +428,18 @@
   box-shadow:0 8px 30px rgba(0,0,0,.45);
 }
 #main.dashboard-view:fullscreen #projection .projection-content img{
-  max-height:calc(100vh - 260px);
+  max-height:calc(100vh - 190px);
 }
 @media (max-height:700px){
   #main.dashboard-view:fullscreen #projection .projection-meta{
-    top:10px;
-    padding:4px 12px 6px;
+    gap:5px;
   }
   #main.dashboard-view:fullscreen #projection .projection-title{font-size:16px}
   #main.dashboard-view:fullscreen #projection .projection-progress{font-size:11px}
-  #main.dashboard-view:fullscreen #projection .projection-stats{gap:5px;margin-top:2px}
+  #main.dashboard-view:fullscreen #projection .projection-stats{gap:5px;margin:0}
   #main.dashboard-view:fullscreen #projection .projection-stats span{padding:7px 10px;font-size:11px}
-  #main.dashboard-view:fullscreen #projection .projection-controls{bottom:10px;padding:6px}
+  #main.dashboard-view:fullscreen #projection .projection-controls{padding:6px}
   #main.dashboard-view:fullscreen #projection .projection-controls .btn{font-size:12px;padding:8px 12px}
-  #main.dashboard-view:fullscreen #projection .projection-content img{max-height:calc(100vh - 190px)}
 }
 
 /* v41: lobby previo con QR creativo */
