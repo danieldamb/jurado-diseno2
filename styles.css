@@ -128,5 +128,5 @@
 #main.home-view #create{margin-top:30px}
 .mini-rating .star:disabled{opacity:.45;cursor:not-allowed;filter:saturate(.55)}
 
-#main.results-view:not(:fullscreen){display:flex;flex-direction:column;gap:32px}
+#main.results-view:not(:fullscreen){display:flex;flex-direction:column;row-gap:32px}
 #main.results-view:not(:fullscreen)>.hero{margin-bottom:0}
